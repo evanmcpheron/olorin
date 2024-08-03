@@ -1,0 +1,72 @@
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MenuItem from '@mui/material/MenuItem';
+import { useState, MouseEvent } from 'react';
+import OlorinSvgIcon from '@olorin/core/OlorinSvgIcon';
+import { useParams } from 'react-router-dom';
+import ToolbarMenu from './ToolbarMenu';
+import { useGetScrumboardBoardLabelsQuery } from '../../../../ScrumboardApi';
+
+type LabelsMenuProps = {
+	labels: string[];
+	onToggleLabel: (labelId: string) => void;
+};
+
+/**
+ * The labels menu component.
+ */
+function LabelsMenu(props: LabelsMenuProps) {
+	const { labels, onToggleLabel } = props;
+
+	const routeParams = useParams();
+	const { boardId } = routeParams;
+
+	const { data: labelsArr } = useGetScrumboardBoardLabelsQuery(boardId);
+
+	const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
+
+	function handleMenuOpen(event: MouseEvent<HTMLButtonElement>) {
+		setAnchorEl(event.currentTarget);
+	}
+
+	function handleMenuClose() {
+		setAnchorEl(null);
+	}
+
+	return (
+		<div>
+			<IconButton
+				onClick={handleMenuOpen}
+				size="large"
+			>
+				<OlorinSvgIcon>heroicons-outline:tag</OlorinSvgIcon>
+			</IconButton>
+			<ToolbarMenu
+				state={anchorEl}
+				onClose={handleMenuClose}
+			>
+				<div>
+					{labelsArr.map((label) => (
+							<MenuItem
+								className="px-8"
+								key={label.id}
+								onClick={() => {
+									onToggleLabel(label.id);
+								}}
+							>
+								<Checkbox checked={labels.includes(label.id)} />
+								<ListItemText className="mx-8">{label.title}</ListItemText>
+								<ListItemIcon className="min-w-24">
+									<OlorinSvgIcon>heroicons-outline:tag</OlorinSvgIcon>
+								</ListItemIcon>
+							</MenuItem>
+						))}
+				</div>
+			</ToolbarMenu>
+		</div>
+	);
+}
+
+export default LabelsMenu;

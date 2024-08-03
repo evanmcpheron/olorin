@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: server
+    container_name: server
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./server:/home/node/server
+      - /home/node/server/node_modules
+    command: npm run start:dev
+    ports:
+      - "8080:8080"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: web
+    container_name: web
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./web:/home/node/web
+      - /home/node/web/node_modules
+    command: npm start
+    ports:
+      - "3000:3000"

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="description"
+			content="Olorin"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<meta
+			name="theme-color"
+			content="#000000"
+		/>
+		<base href="/" />
+
+		<link
+			href="/assets/tailwind-base.css"
+			rel="stylesheet"
+		/>
+
+		<!--
+          manifest.json provides metadata used when your web app is added to the
+          homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+        -->
+		<link
+			rel="manifest"
+			href="/manifest.json"
+		/>
+		<link
+			rel="shortcut icon"
+			href="/favicon.ico"
+		/>
+		<link
+			href="/assets/fonts/material-design-icons/MaterialIconsOutlined.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="/assets/fonts/inter/inter.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="/assets/fonts/meteocons/style.css"
+			rel="stylesheet"
+		/>
+
+		<noscript id="emotion-insertion-point"></noscript>
+
+		<title>Olorin</title>
+		<style>
+			body #olorin-splash-screen {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #111827;
+				color: #f9fafb;
+				z-index: 999999;
+				pointer-events: none;
+				opacity: 1;
+				visibility: visible;
+				transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+			}
+
+			body #olorin-splash-screen img {
+				width: 120px;
+				max-width: 120px;
+			}
+
+			#spinner {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-top: 40px;
+				width: 56px;
+			}
+
+			#spinner > div {
+				width: 12px;
+				height: 12px;
+				background-color: #1e96f7;
+				border-radius: 100%;
+				display: inline-block;
+				-webkit-animation: olorin-bouncedelay 1s infinite ease-in-out both;
+				animation: olorin-bouncedelay 1s infinite ease-in-out both;
+			}
+
+			#spinner .bounce1 {
+				-webkit-animation-delay: -0.32s;
+				animation-delay: -0.32s;
+			}
+
+			#spinner .bounce2 {
+				-webkit-animation-delay: -0.16s;
+				animation-delay: -0.16s;
+			}
+
+			@-webkit-keyframes olorin-bouncedelay {
+				0%,
+				80%,
+				100% {
+					-webkit-transform: scale(0);
+				}
+				40% {
+					-webkit-transform: scale(1);
+				}
+			}
+
+			@keyframes olorin-bouncedelay {
+				0%,
+				80%,
+				100% {
+					-webkit-transform: scale(0);
+					transform: scale(0);
+				}
+				40% {
+					-webkit-transform: scale(1);
+					transform: scale(1);
+				}
+			}
+		</style>
+		<!-- / OLORIN Splash Screen CSS -->
+	</head>
+	<body>
+		<noscript> You need to enable JavaScript to run this app. </noscript>
+
+		<div
+			id="root"
+			class="flex"
+		>
+			<!-- OLORIN Splash Screen -->
+			<div id="olorin-splash-screen">
+				<div class="logo">
+					<img
+						width="128"
+						src="assets/images/logo/logo.svg"
+						alt="logo"
+					/>
+				</div>
+				<div id="spinner">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+			</div>
+			<!-- / OLORIN Splash Screen -->
+		</div>
+		<script
+			type="module"
+			src="/src/index.tsx"
+		></script>
+		<!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    --></body>
+</html>
